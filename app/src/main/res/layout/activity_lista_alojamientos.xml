@@ -29,7 +29,7 @@
     tools:context=".ListaDepartamentosActivity">
     <TextView
         android:id="@+id/estadoBusqueda"
-        android:layout_width="357dp"
+        android:layout_width="match_parent"
         android:layout_height="35dp" />
     <ListView
     android:id="@+id/listaAlojamientos"
