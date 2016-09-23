@@ -58,7 +58,7 @@ public class BuscarDepartamentosTask extends AsyncTask<FormBusqueda,Integer,List
 
             publishProgress(contador++,todos.size());
             try {
-                Thread.sleep(10);
+                Thread.sleep(1);
             }
             catch(Exception e){
                 e.printStackTrace();

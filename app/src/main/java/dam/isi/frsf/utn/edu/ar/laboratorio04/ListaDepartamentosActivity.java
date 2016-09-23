@@ -46,18 +46,18 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
             tvEstadoBusqueda.setVisibility(View.GONE);
             lista=Departamento.getAlojamientosDisponibles();
         }
-        departamentosAdapter = new DepartamentoAdapter(ListaDepartamentosActivity.this,lista);
+        departamentosAdapter = new DepartamentoAdapter(ListaDepartamentosActivity.this, lista);
         listaAlojamientos.setAdapter(departamentosAdapter);
     }
 
     @Override
     public void busquedaFinalizada(List<Departamento> listaDepartamento) {
-        lista.clear();
+       lista.clear();
         lista.addAll(listaDepartamento);
+        tvEstadoBusqueda.setVisibility(View.GONE);
         Toast.makeText(this.getApplicationContext(),lista.size()+"",Toast.LENGTH_SHORT).show();
         tvEstadoBusqueda.setText(getResources().getString(R.string.busqueda_finalizada));
         departamentosAdapter.notifyDataSetChanged();
-        //TODO no anda
     }
 
     @Override
