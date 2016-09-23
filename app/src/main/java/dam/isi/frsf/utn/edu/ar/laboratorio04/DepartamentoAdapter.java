@@ -34,7 +34,7 @@ public class DepartamentoAdapter extends ArrayAdapter<Departamento> {
         txtPrecio.setText("$" + (df.format(this.getItem(position).getPrecio())));
         TextView txtCapacidad = (TextView) row.findViewById(R.id.capacidadMax);
         txtCapacidad.setText(this.getItem(position).getCapacidadMaxima()+".");
-        return (row);
+        return row;
 
     }
 }

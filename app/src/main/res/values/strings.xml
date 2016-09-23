@@ -4,6 +4,7 @@
 
     <string name="navigation_drawer_open">Mostrar Opciones</string>
     <string name="navigation_drawer_close">Ocultar Opciones</string>
+    <string name="busqueda_finalizada">Búsqueda finalizada.</string>
 
-    <string name="action_settings">Configuracion</string>
+    <string name="action_settings">Configuración</string>
 </resources>

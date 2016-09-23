@@ -1,18 +1,18 @@
 package dam.isi.frsf.utn.edu.ar.laboratorio04;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.BuscarDepartamentosTask;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Departamento;
+import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.BuscarDepartamentosTask;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.BusquedaFinalizadaListener;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.FormBusqueda;
 
@@ -28,9 +28,8 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alojamientos);
         lista= new ArrayList<>();
-        listaAlojamientos= (ListView ) findViewById(R.id.listaAlojamientos);
+        listaAlojamientos = (ListView ) findViewById(R.id.listaAlojamientos);
         tvEstadoBusqueda = (TextView) findViewById(R.id.estadoBusqueda);
-
     }
 
     @Override
@@ -53,7 +52,12 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
 
     @Override
     public void busquedaFinalizada(List<Departamento> listaDepartamento) {
-        //TODO implementar
+        lista.clear();
+        lista.addAll(listaDepartamento);
+        Toast.makeText(this.getApplicationContext(),lista.size()+"",Toast.LENGTH_SHORT).show();
+        tvEstadoBusqueda.setText(getResources().getString(R.string.busqueda_finalizada));
+        departamentosAdapter.notifyDataSetChanged();
+        //TODO no anda
     }
 
     @Override

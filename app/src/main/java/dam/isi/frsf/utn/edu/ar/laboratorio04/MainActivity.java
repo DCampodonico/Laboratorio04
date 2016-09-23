@@ -2,19 +2,16 @@ package dam.isi.frsf.utn.edu.ar.laboratorio04;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -60,11 +57,17 @@ public class MainActivity extends AppCompatActivity
 
         frmBusq= new FormBusqueda();
         txtHuespedes = (EditText) findViewById(R.id.cantHuespedes);
+
+
         skPrecioMin = (SeekBar) findViewById(R.id.precioMin);
         skPrecioMin.setOnSeekBarChangeListener(listenerSB);
+        skPrecioMin.setProgress(0);
+        frmBusq.setPrecioMinimo(0.0);
 
-        skPrecioMax= (SeekBar) findViewById(R.id.precioMax);
+        skPrecioMax = (SeekBar) findViewById(R.id.precioMax);
         skPrecioMax.setOnSeekBarChangeListener(listenerSB);
+        skPrecioMax.setProgress(0);
+        frmBusq.setPrecioMaximo(0.0);
 
         swFumadores = (Switch) findViewById(R.id.aptoFumadores);
         adapterCiudad = new ArrayAdapter<Ciudad>(MainActivity.this,android.R.layout.simple_spinner_item, Arrays.asList(Ciudad.CIUDADES));
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity
         public void onClick(View view) {
             Intent i = new Intent(MainActivity.this,ListaDepartamentosActivity.class);
             frmBusq.setPermiteFumar(swFumadores.isSelected());
+            frmBusq.setHuespedes(Integer.valueOf(txtHuespedes.getText().toString()));
             i.putExtra("esBusqueda",true);
             i.putExtra("frmBusqueda",frmBusq);
             startActivity(i);

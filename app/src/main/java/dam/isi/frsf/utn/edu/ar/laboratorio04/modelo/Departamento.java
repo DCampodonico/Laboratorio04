@@ -103,6 +103,9 @@ public class Departamento implements Serializable {
         this.reservas = reservas;
     }
 
+    public Boolean getNoFumador() {
+        return noFumador;
+    }
 
         public Integer getCantidadHabitaciones() {
             return cantidadHabitaciones;
