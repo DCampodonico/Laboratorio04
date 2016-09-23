@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity
 
         frmBusq= new FormBusqueda();
         txtHuespedes = (EditText) findViewById(R.id.cantHuespedes);
-
+        txtHuespedes.setText(2+"");
 
         skPrecioMin = (SeekBar) findViewById(R.id.precioMin);
         skPrecioMin.setOnSeekBarChangeListener(listenerSB);
@@ -93,8 +93,11 @@ public class MainActivity extends AppCompatActivity
         cmbCiudad = (Spinner) findViewById(R.id.comboCiudad);
         cmbCiudad.setAdapter(adapterCiudad);
         cmbCiudad.setOnItemSelectedListener(comboListener);
+
         tvPrecioMinimo = (TextView ) findViewById(R.id.txtPrecioMin);
+        tvPrecioMinimo.setText("Precio Mínimo $0");
         tvPrecioMaximo= (TextView ) findViewById(R.id.txtPrecioMax);
+        tvPrecioMaximo.setText("Precio Máximo $0");
 
         btnBuscar = (Button) findViewById(R.id.btnBuscar);
         btnBuscar.setOnClickListener(btnBusarListener);
@@ -129,11 +132,11 @@ public class MainActivity extends AppCompatActivity
         public void onProgressChanged(SeekBar seekBar, int progress,
         boolean fromUser) {
             if(seekBar.getId()==R.id.precioMin) {
-                tvPrecioMinimo.setText("Precio Minimo "+progress);
+                tvPrecioMinimo.setText("Precio Mínimo $"+progress);
                 frmBusq.setPrecioMinimo(Double.valueOf(progress));
             }
             if(seekBar.getId()==R.id.precioMax) {
-                tvPrecioMaximo.setText("Precio Maximo"+progress);
+                tvPrecioMaximo.setText("Precio Máximo $"+progress);
                 frmBusq.setPrecioMaximo(Double.valueOf(progress));
             }
         }

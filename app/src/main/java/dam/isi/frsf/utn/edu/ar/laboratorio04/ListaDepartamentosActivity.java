@@ -72,7 +72,7 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
     public void busquedaFinalizada(List<Departamento> listaDepartamento) {
        lista.clear();
         lista.addAll(listaDepartamento);
-        Toast.makeText(this.getApplicationContext(),lista.size()+"",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getApplicationContext(),lista.size()+" resultados",Toast.LENGTH_SHORT).show();
         tvEstadoBusqueda.setText(getResources().getString(R.string.busqueda_finalizada));
         departamentosAdapter.notifyDataSetChanged();
     }
