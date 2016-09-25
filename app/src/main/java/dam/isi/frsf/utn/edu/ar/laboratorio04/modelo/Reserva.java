@@ -93,7 +93,6 @@ public class Reserva implements Serializable {
 
     }
 
-
     public Boolean getConfirmada() {
         return confirmada;
     }

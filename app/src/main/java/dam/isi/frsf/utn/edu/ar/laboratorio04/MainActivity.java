@@ -100,10 +100,10 @@ public class MainActivity extends AppCompatActivity
         tvPrecioMaximo.setText("Precio Máximo $0");
 
         btnBuscar = (Button) findViewById(R.id.btnBuscar);
-        btnBuscar.setOnClickListener(btnBusarListener);
+        btnBuscar.setOnClickListener(btnBuscarListener);
     }
 
-    private View.OnClickListener btnBusarListener = new View.OnClickListener() {
+    private View.OnClickListener btnBuscarListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Intent i = new Intent(MainActivity.this,ListaDepartamentosActivity.class);

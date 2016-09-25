@@ -18,10 +18,13 @@
 
 package dam.isi.frsf.utn.edu.ar.laboratorio04;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +37,7 @@ import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.BuscarDepartamentosTask;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.BusquedaFinalizadaListener;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.FormBusqueda;
 
-public class ListaDepartamentosActivity extends AppCompatActivity implements BusquedaFinalizadaListener<Departamento> {
+public class ListaDepartamentosActivity extends AppCompatActivity implements BusquedaFinalizadaListener<Departamento>, AdapterView.OnItemClickListener {
 
     private TextView tvEstadoBusqueda;
     private ListView listaAlojamientos;
@@ -45,8 +48,8 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alojamientos);
-        lista= new ArrayList<>();
-        listaAlojamientos = (ListView ) findViewById(R.id.listaAlojamientos);
+        lista = new ArrayList<>();
+        listaAlojamientos = (ListView) findViewById(R.id.listaAlojamientos);
         tvEstadoBusqueda = (TextView) findViewById(R.id.estadoBusqueda);
     }
 
@@ -55,31 +58,59 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
         super.onStart();
         Intent intent = getIntent();
         Boolean esBusqueda = intent.getExtras().getBoolean("esBusqueda");
-        if(esBusqueda){
-            FormBusqueda fb = (FormBusqueda ) intent.getSerializableExtra("frmBusqueda");
+        if (esBusqueda) {
+            FormBusqueda fb = (FormBusqueda) intent.getSerializableExtra("frmBusqueda");
             new BuscarDepartamentosTask(ListaDepartamentosActivity.this).execute(fb);
             tvEstadoBusqueda.setText("Buscando....");
             tvEstadoBusqueda.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             tvEstadoBusqueda.setVisibility(View.GONE);
-            lista=Departamento.getAlojamientosDisponibles();
+            lista = Departamento.getAlojamientosDisponibles();
         }
         departamentosAdapter = new DepartamentoAdapter(ListaDepartamentosActivity.this, lista);
         listaAlojamientos.setAdapter(departamentosAdapter);
+
+        listaAlojamientos.setOnItemClickListener(this);
     }
 
     @Override
     public void busquedaFinalizada(List<Departamento> listaDepartamento) {
-       lista.clear();
+        lista.clear();
         lista.addAll(listaDepartamento);
-        Toast.makeText(this.getApplicationContext(),lista.size()+" resultados",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getApplicationContext(), lista.size() + " resultados", Toast.LENGTH_SHORT).show();
         tvEstadoBusqueda.setText(getResources().getString(R.string.busqueda_finalizada));
         departamentosAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void busquedaActualizada(String msg) {
-        tvEstadoBusqueda.setText(" Buscando..."+msg);
+        tvEstadoBusqueda.setText(" Buscando..." + msg);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Departamento d = (Departamento) listaAlojamientos.getItemAtPosition(position);
+
+        mostrarAltaReservaDialog(d);
+
+    }
+
+    private void mostrarAltaReservaDialog(final Departamento d){
+        AlertDialog.Builder altaReservaDialog = new AlertDialog.Builder(this);
+        altaReservaDialog.setTitle("Reservar");
+        altaReservaDialog.setMessage(d.getDescripcion()+"");
+        altaReservaDialog.setCancelable(true);
+        altaReservaDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                btnOk(d);
+            }
+        });
+        altaReservaDialog.show();
+    }
+
+    public void btnOk(Departamento d) {
+        Intent i = new Intent(ListaDepartamentosActivity.this, AltaReservaActivity.class);
+        i.putExtra("departamento", d);
+        startActivity(i);
+    }
 }
