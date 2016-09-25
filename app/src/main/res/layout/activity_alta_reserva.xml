@@ -60,7 +60,7 @@
             android:layout_gravity="right"
             android:clickable="true"
             app:fabSize="normal"
-            app:srcCompat="@drawable/ic_action_name" />
+            app:srcCompat="@drawable/ic_action_name2" />
 
     </LinearLayout>
 </RelativeLayout>
