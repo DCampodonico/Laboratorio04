@@ -18,24 +18,67 @@
 
 package dam.isi.frsf.utn.edu.ar.laboratorio04;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.Toast;
 
-public class AltaReservaActivity extends AppCompatActivity {
+import java.util.Date;
+
+import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Departamento;
+import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Reserva;
+import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Usuario;
+
+public class AltaReservaActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private Date fechaInicio;
+    private Date fechaFin;
+    private FloatingActionButton fabtnConfirmar;
+    private Usuario usuario;
+    private Departamento departamento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alta_reserva);
+        setParametros();
+        fabtnConfirmar.setOnClickListener(this);
     }
 
     @Override
     protected void onStart(){
         super.onStart();
-
     }
 
-    private void btnConfirmar(){
-
+    private void setParametros(){
+        //fechaInicio = findViewById(R.id.tvFechaInicio);
+        //fechaFin = findViewById(R.id.tvFechaFin);
+        Intent intent = getIntent();
+        departamento = (Departamento) intent.getSerializableExtra("departamento");
+        usuario = (Usuario) intent.getSerializableExtra("usuario");
+        fechaInicio = new Date();
+        fechaFin = new Date();
+        fabtnConfirmar = (FloatingActionButton) findViewById(R.id.fabtnConfirmar);
     }
+
+    private void confirmar(){
+        Integer id = usuario.getReservas().size()+1;
+        Reserva reserva = new Reserva(id,fechaInicio,fechaFin,departamento);
+        usuario.setReserva(reserva);
+        Toast.makeText(getApplicationContext(),"Se ha realizado la reserva exitosamente! "+usuario.getReservas().size(),Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.fabtnConfirmar: {
+                confirmar();
+            } break;
+        }
+    }
+
 }

@@ -20,6 +20,7 @@ package dam.isi.frsf.utn.edu.ar.laboratorio04;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CpuUsageInfo;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -42,6 +43,7 @@ import android.widget.TextView;
 import java.util.Arrays;
 
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Ciudad;
+import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Usuario;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.FormBusqueda;
 
 public class MainActivity extends AppCompatActivity
@@ -57,6 +59,8 @@ public class MainActivity extends AppCompatActivity
     private EditText txtHuespedes;
     private Switch swFumadores;
     private FormBusqueda frmBusq;
+    private Usuario usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +76,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        usuario = new Usuario(1);
 
         frmBusq= new FormBusqueda();
         txtHuespedes = (EditText) findViewById(R.id.cantHuespedes);
@@ -111,6 +117,7 @@ public class MainActivity extends AppCompatActivity
             frmBusq.setHuespedes(Integer.valueOf(txtHuespedes.getText().toString()));
             i.putExtra("esBusqueda",true);
             i.putExtra("frmBusqueda",frmBusq);
+            i.putExtra("usuario", usuario);
             startActivity(i);
         }
     };
@@ -199,6 +206,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_perfil:
                 break;
             case R.id.nav_reservas:
+                Intent i2 = new Intent(MainActivity.this,ReservasActivity.class);
+                i2.putExtra("usuario",usuario);
+                startActivity(i2);
                 break;
             case R.id.nav_destinos:
                 break;

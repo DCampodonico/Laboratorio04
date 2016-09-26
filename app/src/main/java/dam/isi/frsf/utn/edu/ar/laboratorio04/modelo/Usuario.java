@@ -18,8 +18,15 @@
 
 package dam.isi.frsf.utn.edu.ar.laboratorio04.modelo;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.StringTokenizer;
 
 /**
  * Created by mdominguez on 22/09/16.
@@ -31,6 +38,10 @@ public class Usuario implements Serializable {
     private List<Reserva> reservas;
     private Integer puntosSuperPremio;
 
+    public Usuario(Integer id){
+        this.id = id;
+        reservas = new ArrayList<>();
+    }
 
     public Integer getId() {
         return id;
@@ -52,8 +63,8 @@ public class Usuario implements Serializable {
         return reservas;
     }
 
-    public void setReservas(List<Reserva> reservas) {
-        this.reservas = reservas;
+    public void setReserva(Reserva reserva) {
+        this.reservas.add(reserva);
     }
 
     public Integer getPuntosSuperPremio() {

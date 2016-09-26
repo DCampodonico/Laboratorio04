@@ -42,25 +42,25 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/tvLlegada"
+            android:id="@+id/tvFechaInicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/tvSalida"
+            android:id="@+id/tvFechaFin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floatingActionButton3"
+            android:id="@+id/fabtnConfirmar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:clickable="true"
             app:fabSize="normal"
-            app:srcCompat="@drawable/ic_action_name2" />
+            app:srcCompat="@drawable/ic_action_name" />
 
     </LinearLayout>
 </RelativeLayout>
