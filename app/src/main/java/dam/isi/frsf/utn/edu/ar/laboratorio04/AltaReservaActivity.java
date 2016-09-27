@@ -24,9 +24,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Departamento;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Reserva;
@@ -34,11 +38,11 @@ import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Usuario;
 
 public class AltaReservaActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Date fechaInicio;
-    private Date fechaFin;
-    private FloatingActionButton fabtnConfirmar;
-    private Usuario usuario;
-    private Departamento departamento;
+    DatePicker dpFechaInicio, dpFechaFin;
+    Date fechaInicio, fechaFin;
+    TextView tvDescripcion, tvFechaInicio, tvFechaFin, tvPrecio;
+    FloatingActionButton fabtnConfirmar;
+    Departamento departamento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,22 +58,67 @@ public class AltaReservaActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setParametros(){
-        //fechaInicio = findViewById(R.id.tvFechaInicio);
-        //fechaFin = findViewById(R.id.tvFechaFin);
         Intent intent = getIntent();
         departamento = (Departamento) intent.getSerializableExtra("departamento");
-        usuario = (Usuario) intent.getSerializableExtra("usuario");
-        fechaInicio = new Date();
-        fechaFin = new Date();
+
+        tvDescripcion = (TextView) findViewById(R.id.tvDescripcion);
+        tvDescripcion.setText(departamento.getDescripcion());
+        tvFechaInicio = (TextView) findViewById(R.id.tvFechaInicio);
+        tvFechaInicio.setText(R.string.tv_fecha_inicio);
+        dpFechaInicio = (DatePicker) findViewById(R.id.dpFechaInicio);
+        tvFechaFin = (TextView) findViewById(R.id.tvFechaFin);
+        tvFechaFin.setText(R.string.tv_fecha_fin);
+        dpFechaFin = (DatePicker) findViewById(R.id.dpFechaFin);
+        tvPrecio = (TextView) findViewById(R.id.tvPrecio);
+        tvPrecio.setText("$ "+departamento.getPrecio());
         fabtnConfirmar = (FloatingActionButton) findViewById(R.id.fabtnConfirmar);
     }
 
     private void confirmar(){
-        Integer id = usuario.getReservas().size()+1;
-        Reserva reserva = new Reserva(id,fechaInicio,fechaFin,departamento);
-        usuario.setReserva(reserva);
-        Toast.makeText(getApplicationContext(),"Se ha realizado la reserva exitosamente! "+usuario.getReservas().size(),Toast.LENGTH_SHORT).show();
-        finish();
+        fechaInicio = getDateFromDatePicker(dpFechaInicio);
+        fechaFin = getDateFromDatePicker(dpFechaFin);
+
+        String msjError = validarReserva();
+
+        if(msjError==null) {
+            //Toast.makeText(getApplicationContext(),msjError,Toast.LENGTH_LONG).show();
+            Integer id = 1; //TODO:
+            Reserva reserva = new Reserva(id, fechaInicio, fechaFin, departamento);
+            Intent i = new Intent();
+            i.putExtra("reserva", reserva);
+            setResult(0, i);
+            finish();
+        }else{
+            Toast.makeText(getApplicationContext(),msjError,Toast.LENGTH_LONG).show();
+        }
+    }
+
+    //TODO: Implementar
+    private String validarReserva() {
+        if(!fechaInicio.before(fechaFin)){
+            return "Verifique que la fecha de inicio sea antes que la de finalización";
+        }else {
+            List<Reserva> reservas = departamento.getReservas();
+            for (Reserva r : reservas) {
+                if (isOverhead(r.getFechaInicio(), r.getFechaFin(), fechaInicio, fechaFin)) {
+                    return "Existe una reserva desde el " + formatFecha(r.getFechaInicio()) + " al " + formatFecha(r.getFechaFin());
+                }
+            }
+        }
+        return null;
+    }
+
+    private boolean isOverhead(Date inicio1, Date fin1, Date inicio2, Date fin2){
+        if(inicio1.before(inicio2)){
+            if(fin1.before(inicio2)){
+                return false;
+            }
+        }else if(inicio2.before(inicio1)){
+            if (fin2.before(inicio1)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -79,6 +128,25 @@ public class AltaReservaActivity extends AppCompatActivity implements View.OnCli
                 confirmar();
             } break;
         }
+    }
+
+    //Convertir DatePicker a Date
+    private Date getDateFromDatePicker(DatePicker datePicker){
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth();
+        int year =  datePicker.getYear();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+
+        return calendar.getTime();
+    }
+
+    //TODO ver
+    private String formatFecha(Date fecha){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        return calendar.get(Calendar.DAY_OF_MONTH)+"/"+(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.YEAR);
     }
 
 }

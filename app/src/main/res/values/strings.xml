@@ -24,5 +24,8 @@
     <string name="navigation_drawer_close">Ocultar Opciones</string>
     <string name="busqueda_finalizada">Búsqueda finalizada.</string>
 
+    <string name="tv_fecha_inicio">Fecha de inicio de alquiler</string>
+    <string name="tv_fecha_fin">Fecha de fin de alquiler</string>
+
     <string name="action_settings">Configuración</string>
 </resources>

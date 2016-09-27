@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Departamento;
+import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Reserva;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Usuario;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.BuscarDepartamentosTask;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.BusquedaFinalizadaListener;
@@ -40,11 +41,10 @@ import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.FormBusqueda;
 
 public class ListaDepartamentosActivity extends AppCompatActivity implements BusquedaFinalizadaListener<Departamento>, AdapterView.OnItemClickListener {
 
-    private TextView tvEstadoBusqueda;
-    private ListView listaAlojamientos;
-    private DepartamentoAdapter departamentosAdapter;
-    private List<Departamento> lista;
-    private Usuario usuario;
+    TextView tvEstadoBusqueda;
+    ListView listaAlojamientos;
+    DepartamentoAdapter departamentosAdapter;
+    List<Departamento> lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,6 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
         super.onStart();
         Intent intent = getIntent();
         Boolean esBusqueda = intent.getExtras().getBoolean("esBusqueda");
-        usuario = (Usuario) intent.getSerializableExtra("usuario");
         if (esBusqueda) {
             FormBusqueda fb = (FormBusqueda) intent.getSerializableExtra("frmBusqueda");
             new BuscarDepartamentosTask(ListaDepartamentosActivity.this).execute(fb);
@@ -113,7 +112,19 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
     public void btnOk(Departamento d) {
         Intent i = new Intent(ListaDepartamentosActivity.this, AltaReservaActivity.class);
         i.putExtra("departamento", d);
-        i.putExtra("usuario", usuario);
-        startActivity(i);
+        startActivityForResult(i,2);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((resultCode==0)&&(requestCode==2)){
+            if(data != null) {
+                setResult(0,data);
+                finish();
+            }
+        }else{
+            Toast.makeText(getApplicationContext(),"Ha ocurrido un error en la reserva",Toast.LENGTH_SHORT).show();
+        }
     }
 }

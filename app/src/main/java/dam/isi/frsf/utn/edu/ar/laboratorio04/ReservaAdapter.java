@@ -26,6 +26,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.text.StringCharacterIterator;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Departamento;
@@ -54,7 +57,14 @@ public class ReservaAdapter extends ArrayAdapter<Reserva> {
         TextView txtCapacidad = (TextView) row.findViewById(R.id.capacidadMax);
         txtCapacidad.setText(this.getItem(position).getAlojamiento().getCapacidadMaxima()+".");
         TextView tvPeriodoReserva = (TextView) row.findViewById(R.id.tvPeriodoReserva);
-        tvPeriodoReserva.setText("Desde "+this.getItem(position).getFechaInicio()+" hasta "+this.getItem(position).getFechaFin()+".");
+        tvPeriodoReserva.setText("Desde "+formatFecha(this.getItem(position).getFechaInicio())+" hasta "+formatFecha(this.getItem(position).getFechaFin())+".");
         return row;
+    }
+
+    //TODO ver
+    private String formatFecha(Date fecha){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        return calendar.get(Calendar.DAY_OF_MONTH)+"/"+(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.YEAR);
     }
 }

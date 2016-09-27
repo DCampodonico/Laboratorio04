@@ -31,7 +31,6 @@ public class ReservasActivity extends AppCompatActivity {
         Intent intent = getIntent();
         usuario = (Usuario) intent.getSerializableExtra("usuario");
         listaReservas = usuario.getReservas();
-        Toast.makeText(getApplicationContext(), listaReservas.size()+"",Toast.LENGTH_SHORT).show(); ;
         ReservaAdapter  reservaAdapter= new ReservaAdapter(ReservasActivity.this, listaReservas);
         lvReservas.setAdapter(reservaAdapter);
     }

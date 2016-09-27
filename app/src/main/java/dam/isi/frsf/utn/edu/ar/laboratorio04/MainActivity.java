@@ -39,10 +39,12 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Ciudad;
+import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Reserva;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Usuario;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.FormBusqueda;
 
@@ -77,7 +79,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        usuario = new Usuario(1);
+        if(usuario==null) {
+            usuario = new Usuario(1);
+        }
 
         frmBusq= new FormBusqueda();
         txtHuespedes = (EditText) findViewById(R.id.cantHuespedes);
@@ -117,16 +121,28 @@ public class MainActivity extends AppCompatActivity
             frmBusq.setHuespedes(Integer.valueOf(txtHuespedes.getText().toString()));
             i.putExtra("esBusqueda",true);
             i.putExtra("frmBusqueda",frmBusq);
-            i.putExtra("usuario", usuario);
-            startActivity(i);
+            startActivityForResult(i,1);
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((resultCode==0)&&(requestCode==1)) { //TODO: Está bien esto?
+            if(data!=null){
+                Reserva reserva = (Reserva) data.getSerializableExtra("reserva");
+                reserva.getAlojamiento().getReservas().add(reserva);
+                usuario.getReservas().add(reserva);
+            }
+        }else{
+            Toast.makeText(getApplicationContext(),"Ha ocurrido un error en la reserva",Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private AdapterView.OnItemSelectedListener comboListener = new  AdapterView.OnItemSelectedListener() {
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             Ciudad item = (Ciudad) parent.getItemAtPosition(pos);
             frmBusq.setCiudad(item);
-            Log.d("MainActivity","ciudad seteada "+item);
         }
         public void onNothingSelected(AdapterView<?> parent) {
         }
