@@ -19,9 +19,9 @@
 package dam.isi.frsf.utn.edu.ar.laboratorio04;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -30,11 +30,9 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Departamento;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Reserva;
-import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Usuario;
 
 public class AltaReservaActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -84,6 +82,7 @@ public class AltaReservaActivity extends AppCompatActivity implements View.OnCli
             //Toast.makeText(getApplicationContext(),msjError,Toast.LENGTH_LONG).show();
             Integer id = 1; //TODO:
             Reserva reserva = new Reserva(id, fechaInicio, fechaFin, departamento);
+            Departamento.getById(departamento.getId()).getReservas().add(reserva);
             Intent i = new Intent();
             i.putExtra("reserva", reserva);
             setResult(0, i);

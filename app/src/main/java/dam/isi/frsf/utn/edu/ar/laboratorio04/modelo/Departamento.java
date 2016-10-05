@@ -186,4 +186,11 @@ public class Departamento implements Serializable {
         return _ALOJAMIENTOS_DISPONIBLES;
     }
 
+    public static Departamento getById(Integer id) {
+        for(Departamento d : _ALOJAMIENTOS_DISPONIBLES){
+            if(d.getId().equals(id))
+                return d;
+        }
+        return null;
+    }
 }

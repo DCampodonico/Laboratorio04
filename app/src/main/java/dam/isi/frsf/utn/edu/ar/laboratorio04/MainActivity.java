@@ -20,14 +20,12 @@ package dam.isi.frsf.utn.edu.ar.laboratorio04;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CpuUsageInfo;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -131,7 +129,6 @@ public class MainActivity extends AppCompatActivity
         if((resultCode==0)&&(requestCode==1)) { //TODO: Está bien esto?
             if(data!=null){
                 Reserva reserva = (Reserva) data.getSerializableExtra("reserva");
-                reserva.getAlojamiento().getReservas().add(reserva);
                 usuario.getReservas().add(reserva);
             }
         }else{
@@ -215,7 +212,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_deptos:
                 Intent i1 = new Intent(MainActivity.this,ListaDepartamentosActivity.class);
                 i1.putExtra("esBusqueda",false );
-                startActivity(i1);
+                startActivityForResult(i1, 1);
                 break;
             case R.id.nav_ofertas:
                 break;
