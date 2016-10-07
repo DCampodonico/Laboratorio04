@@ -18,6 +18,8 @@
 
 package dam.isi.frsf.utn.edu.ar.laboratorio04;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -130,6 +132,14 @@ public class MainActivity extends AppCompatActivity
             if(data!=null){
                 Reserva reserva = (Reserva) data.getSerializableExtra("reserva");
                 usuario.getReservas().add(reserva);
+
+                long tiempo = System.currentTimeMillis() + 15000;
+                Intent intent = new Intent(this, AlarmReceiver.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("reserva", reserva);
+                PendingIntent pi = PendingIntent.getBroadcast(this.getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager am =(AlarmManager)getSystemService(ALARM_SERVICE);
+                am.setRepeating(AlarmManager.RTC_WAKEUP, tiempo, 15*1000, pi);
             }
         }else{
             Toast.makeText(getApplicationContext(),"Ha ocurrido un error en la reserva",Toast.LENGTH_SHORT).show();

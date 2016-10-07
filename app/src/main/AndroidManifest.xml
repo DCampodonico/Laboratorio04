@@ -36,7 +36,20 @@
         </activity>
         <activity android:name=".ListaDepartamentosActivity" />
         <activity android:name=".AltaReservaActivity" />
-        <activity android:name=".ReservasActivity"></activity>
+        <activity android:name=".ReservasActivity" />
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".NotificacionReserva"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="dam.isi.frsf.utn.edu.ar.laboratorio04.notificacion"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
