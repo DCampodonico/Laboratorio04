@@ -51,7 +51,7 @@ import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Usuario;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.FormBusqueda;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private Button btnBuscar;
     private Spinner cmbCiudad;
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity
     private FormBusqueda frmBusq;
     private Usuario usuario;
     private SharedPreferences preferencias;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         if(usuario==null) {
@@ -91,12 +92,14 @@ public class MainActivity extends AppCompatActivity
         preferencias = PreferenceManager.getDefaultSharedPreferences(this);
 
         tvUsuario = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvUsuario);
-        String opcionUsuario = preferencias.getString("opcion_usuario", "Android Studio");
+        String opcionUsuario = preferencias.getString("opcionUsuario", getResources().getString(R.string.opcionUsuario_summary));
         tvUsuario.setText(opcionUsuario);
 
         tvCorreo = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvCorreo);
-        String opcionCorreo = preferencias.getString("opcion_correo", "android.studio@android.com");
+        String opcionCorreo = preferencias.getString("opcionCorreo", getResources().getString(R.string.opcionCorreo_summary));
         tvCorreo.setText(opcionCorreo);
+
+        preferencias.registerOnSharedPreferenceChangeListener(this);
 
         frmBusq= new FormBusqueda();
         txtHuespedes = (EditText) findViewById(R.id.cantHuespedes);
@@ -258,5 +261,14 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        String opcionUsuario = preferencias.getString("opcionUsuario", getResources().getString(R.string.opcionUsuario_summary));
+        tvUsuario.setText(opcionUsuario);
+
+        String opcionCorreo = preferencias.getString("opcionCorreo", getResources().getString(R.string.opcionCorreo_summary));
+        tvCorreo.setText(opcionCorreo);
     }
 }
