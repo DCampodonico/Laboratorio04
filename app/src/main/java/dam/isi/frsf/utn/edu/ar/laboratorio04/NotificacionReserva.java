@@ -25,12 +25,13 @@ public class NotificacionReserva extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "notificar");
+
         Usuario usuario = (Usuario) intent.getSerializableExtra("usuario");
         Reserva reserva = (Reserva) intent.getSerializableExtra("reserva");
         Departamento alojamiento = reserva.getAlojamiento();
-        Intent i = new Intent(context, ReservasActivity.class);
-        i.putExtra("usuario", usuario);
-        PendingIntent pi = PendingIntent.getActivity(context, 1, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intentReservas = new Intent(context, ReservasActivity.class);
+        intentReservas.putExtra("usuario", usuario);
+        PendingIntent piReservas = PendingIntent.getActivity(context, 2, intentReservas, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder
@@ -43,7 +44,7 @@ public class NotificacionReserva extends BroadcastReceiver {
         builder
                  .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
                  .setAutoCancel(true)
-                 .setContentIntent(pi);
+                 .setContentIntent(piReservas);
         Notification notification = builder.build();
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);
