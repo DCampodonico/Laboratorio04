@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Departamento;
@@ -43,7 +44,10 @@ public class NotificacionReserva extends BroadcastReceiver {
                 .setContentTitle(context.getResources().getString(R.string.titulo_reserva_aceptada));
 
         String text = context.getResources().getString(R.string.texto_reserva_aceptada);
-        text = String.format(Locale.getDefault(), text, alojamiento.getDescripcion(), alojamiento.getCiudad(), reserva.getFechaInicio(), reserva.getFechaFin());
+        SimpleDateFormat simpleDate =  new SimpleDateFormat("dd/MM/yyyy");
+        String fechaInicio = simpleDate.format(reserva.getFechaInicio());
+        String fechaFin = simpleDate.format(reserva.getFechaFin());
+        text = String.format(Locale.getDefault(), text, alojamiento.getDescripcion(), alojamiento.getCiudad(), fechaInicio, fechaFin);
 
         builder
                  .setStyle(new NotificationCompat.BigTextStyle().bigText(text))

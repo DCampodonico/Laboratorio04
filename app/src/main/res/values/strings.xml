@@ -29,7 +29,7 @@
 
     <string name="action_settings">Configuración</string>
 
-    <string name="texto_reserva_aceptada">Su reserva del%1$s en %2$s desde %3$s hasta %4$s ha sido aceptada!</string>
+    <string name="texto_reserva_aceptada">Su reserva del%1$s en %2$s desde el %3$s hasta el %4$s ha sido aceptada!</string>
     <string name="titulo_reserva_aceptada">Reserva aceptada!</string>
     <string name="opcionUsuario_title">Nombre de usuario</string>
     <string name="opcionUsuario_summary">usuario</string>

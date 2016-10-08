@@ -91,9 +91,8 @@ public class AltaReservaActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    //TODO: Implementar
     private String validarReserva() {
-        if(!fechaInicio.before(fechaFin)){
+        if(!fechaInicio.before(fechaFin) && !fechaInicio.equals(fechaFin)){
             return "Verifique que la fecha de inicio sea antes que la de finalización";
         }else {
             List<Reserva> reservas = departamento.getReservas();
