@@ -34,17 +34,16 @@ public class NotificacionReserva extends BroadcastReceiver {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_stat_name)
                 .setContentTitle(context.getResources().getString(R.string.titulo_reserva_aceptada));
 
         String text = context.getResources().getString(R.string.texto_reserva_aceptada);
         text = String.format(Locale.getDefault(), text, alojamiento.getDescripcion(), alojamiento.getCiudad(), reserva.getFechaInicio(), reserva.getFechaFin());
 
-         builder
+        builder
                  .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
-                 .setAutoCancel(true);
-
-        builder.setContentIntent(pi);
+                 .setAutoCancel(true)
+                 .setContentIntent(pi);
         Notification notification = builder.build();
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);
