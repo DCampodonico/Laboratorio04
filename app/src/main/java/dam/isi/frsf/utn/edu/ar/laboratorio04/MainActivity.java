@@ -21,7 +21,9 @@ package dam.isi.frsf.utn.edu.ar.laboratorio04;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -57,11 +59,14 @@ public class MainActivity extends AppCompatActivity
     private SeekBar skPrecioMin;
     private TextView tvPrecioMinimo;
     private TextView tvPrecioMaximo;
+    private TextView tvUsuario;
+    private TextView tvCorreo;
     private SeekBar skPrecioMax;
     private EditText txtHuespedes;
     private Switch swFumadores;
     private FormBusqueda frmBusq;
     private Usuario usuario;
+    private SharedPreferences preferencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +87,16 @@ public class MainActivity extends AppCompatActivity
         if(usuario==null) {
             usuario = new Usuario(1);
         }
+
+        preferencias = PreferenceManager.getDefaultSharedPreferences(this);
+
+        tvUsuario = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvUsuario);
+        String opcionUsuario = preferencias.getString("opcion_usuario", "Android Studio");
+        tvUsuario.setText(opcionUsuario);
+
+        tvCorreo = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvCorreo);
+        String opcionCorreo = preferencias.getString("opcion_correo", "android.studio@android.com");
+        tvCorreo.setText(opcionCorreo);
 
         frmBusq= new FormBusqueda();
         txtHuespedes = (EditText) findViewById(R.id.cantHuespedes);
@@ -227,11 +242,14 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_ofertas:
                 break;
             case R.id.nav_perfil:
-                break;
-            case R.id.nav_reservas:
-                Intent i2 = new Intent(MainActivity.this,ReservasActivity.class);
+                Intent i2 = new Intent(MainActivity.this, Preferencias.class);
                 i2.putExtra("usuario",usuario);
                 startActivity(i2);
+                break;
+            case R.id.nav_reservas:
+                Intent i3 = new Intent(MainActivity.this,ReservasActivity.class);
+                i3.putExtra("usuario",usuario);
+                startActivity(i3);
                 break;
             case R.id.nav_destinos:
                 break;

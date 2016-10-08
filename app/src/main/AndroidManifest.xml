@@ -47,9 +47,11 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="dam.isi.frsf.utn.edu.ar.laboratorio04.notificacion"/>
+                <action android:name="dam.isi.frsf.utn.edu.ar.laboratorio04.notificacion" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".Preferencias"></activity>
     </application>
 
 </manifest>

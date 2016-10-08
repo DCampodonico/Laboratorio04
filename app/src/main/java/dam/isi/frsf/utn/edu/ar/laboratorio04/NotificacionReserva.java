@@ -6,6 +6,9 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -19,6 +22,7 @@ import static android.content.ContentValues.TAG;
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class NotificacionReserva extends BroadcastReceiver {
+
     public NotificacionReserva() {
     }
 
@@ -45,6 +49,12 @@ public class NotificacionReserva extends BroadcastReceiver {
                  .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
                  .setAutoCancel(true)
                  .setContentIntent(piReservas);
+
+        SharedPreferences preferencias = PreferenceManager.getDefaultSharedPreferences(context);
+        String strRingtonePreference = preferencias.getString("opcionRingtone", "DEFAULT_SOUND");
+        Uri defaultSoundUri = Uri.parse(strRingtonePreference);
+        builder.setSound(defaultSoundUri);
+
         Notification notification = builder.build();
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);

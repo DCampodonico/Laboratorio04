@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="opcionUsuario"
+        android:title="@string/opcionUsuario_title"
+        android:summary="@string/opcionUsuario_summary"
+        android:dialogTitle="@string/opcionUsuario_title">
+
+    </EditTextPreference>
+
+    <EditTextPreference
+        android:key="opcionCorreo"
+        android:title="@string/opcionCorreo_title"
+        android:summary="@string/opcionCorreo_summary"
+        android:dialogTitle="@string/opcionCorreo_title">
+
+    </EditTextPreference>
+
+    <RingtonePreference
+        android:key="opcionRingtone"
+        android:title="@string/opcionRingtone_title"
+        android:showSilent="true"
+        android:ringtoneType="notification"
+        android:summary="@string/opcionRingtone_summary">
+
+    </RingtonePreference>
+</PreferenceScreen>
