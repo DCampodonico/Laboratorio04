@@ -225,6 +225,9 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i2 = new Intent(MainActivity.this, Preferencias.class);
+            i2.putExtra("usuario",usuario);
+            startActivity(i2);
             return true;
         }
 
