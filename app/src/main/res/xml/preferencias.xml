@@ -4,6 +4,7 @@
         android:key="opcionUsuario"
         android:title="@string/opcionUsuario_title"
         android:summary="@string/opcionUsuario_summary"
+        android:capitalize="words"
         android:dialogTitle="@string/opcionUsuario_title">
 
     </EditTextPreference>

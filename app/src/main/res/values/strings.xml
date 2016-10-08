@@ -35,6 +35,7 @@
     <string name="opcionUsuario_summary">Android Studio</string>
     <string name="opcionCorreo_title">Correo electrónico</string>
     <string name="opcionCorreo_summary">android.studio@android.com</string>
+    <string name="opcionCorreo_error">El correo ingresado es inválido!</string>
     <string name="opcionRingtone_title">Ringtone</string>
     <string name="opcionRingtone_summary">Ringtone</string>
 </resources>

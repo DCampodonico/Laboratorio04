@@ -6,9 +6,13 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.text.TextUtils;
+import android.util.Patterns;
+import android.widget.Toast;
 
 public class Preferencias extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     EditTextPreference opcionUsuario;
@@ -20,16 +24,30 @@ public class Preferencias extends PreferenceActivity implements SharedPreference
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferencias);
 
+        preferencias = PreferenceManager.getDefaultSharedPreferences(this);
+        opcionUsuario = (EditTextPreference) findPreference("opcionUsuario");
+        opcionCorreo = (EditTextPreference) findPreference("opcionCorreo");
+        opcionRingtone = (RingtonePreference) findPreference("opcionRingtone");
+
+        opcionCorreo.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (!TextUtils.isEmpty(newValue.toString()) && Patterns.EMAIL_ADDRESS.matcher(newValue.toString()).matches()) {
+                    return true;
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),getResources().getString(R.string.opcionCorreo_error), Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            }
+        });
         updatePreferences();
 
         preferencias.registerOnSharedPreferenceChangeListener(this);
     }
 
     private void updatePreferences() {
-        preferencias = PreferenceManager.getDefaultSharedPreferences(this);
-        opcionUsuario = (EditTextPreference) findPreference("opcionUsuario");
-        opcionCorreo = (EditTextPreference) findPreference("opcionCorreo");
-        opcionRingtone = (RingtonePreference) findPreference("opcionRingtone");
+
 
         opcionUsuario.setSummary(preferencias.getString("opcionUsuario", getResources().getString(R.string.opcionUsuario_summary)));
         opcionCorreo.setSummary(preferencias.getString("opcionCorreo", getResources().getString(R.string.opcionCorreo_summary)));
