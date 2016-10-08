@@ -148,13 +148,13 @@ public class MainActivity extends AppCompatActivity
                 Reserva reserva = (Reserva) data.getSerializableExtra("reserva");
                 usuario.getReservas().add(reserva);
 
-                long tiempo = System.currentTimeMillis() + 1000;
+                long tiempo = System.currentTimeMillis() + 15000;
                 Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("reserva", reserva);
-                PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), reserva.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 AlarmManager am =(AlarmManager) getApplicationContext().getSystemService(ALARM_SERVICE);
-                am.setRepeating(AlarmManager.RTC_WAKEUP, tiempo, 1*1000, pi);
+                am.setRepeating(AlarmManager.RTC_WAKEUP, tiempo, 15000, pi);
             }
         }else{
             Toast.makeText(getApplicationContext(),"Ha ocurrido un error en la reserva",Toast.LENGTH_SHORT).show();

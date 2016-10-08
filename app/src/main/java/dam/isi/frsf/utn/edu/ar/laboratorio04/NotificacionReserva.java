@@ -57,6 +57,6 @@ public class NotificacionReserva extends BroadcastReceiver {
 
         Notification notification = builder.build();
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notification);
+        notificationManager.notify(reserva.getId(), notification);
     }
 }

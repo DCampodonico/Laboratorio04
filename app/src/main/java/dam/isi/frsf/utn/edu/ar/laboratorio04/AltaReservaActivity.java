@@ -36,11 +36,12 @@ import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Reserva;
 
 public class AltaReservaActivity extends AppCompatActivity implements View.OnClickListener {
 
-    DatePicker dpFechaInicio, dpFechaFin;
-    Date fechaInicio, fechaFin;
-    TextView tvDescripcion, tvFechaInicio, tvFechaFin, tvPrecio;
-    FloatingActionButton fabtnConfirmar;
-    Departamento departamento;
+    private DatePicker dpFechaInicio, dpFechaFin;
+    private Date fechaInicio, fechaFin;
+    private TextView tvDescripcion, tvFechaInicio, tvFechaFin, tvPrecio;
+    private FloatingActionButton fabtnConfirmar;
+    private Departamento departamento;
+    private static int id = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +80,7 @@ public class AltaReservaActivity extends AppCompatActivity implements View.OnCli
         String msjError = validarReserva();
 
         if(msjError==null) {
-            //Toast.makeText(getApplicationContext(),msjError,Toast.LENGTH_LONG).show();
-            Integer id = 1; //TODO:
-            Reserva reserva = new Reserva(id, fechaInicio, fechaFin, departamento);
+            Reserva reserva = new Reserva(id++, fechaInicio, fechaFin, departamento);
             Departamento.getById(departamento.getId()).getReservas().add(reserva);
             Intent i = new Intent();
             i.putExtra("reserva", reserva);

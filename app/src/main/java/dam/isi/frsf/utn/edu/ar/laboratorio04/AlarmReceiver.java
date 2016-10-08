@@ -22,15 +22,16 @@ public class AlarmReceiver extends BroadcastReceiver {
         long tiempo = System.currentTimeMillis();
         Log.d(TAG, "alarma: " + tiempo);
         if(tiempo % 3 == 0){
-            Intent intentAlarma = new Intent(context.getApplicationContext(), AlarmReceiver.class);
-            PendingIntent piAlarma = PendingIntent.getBroadcast(context.getApplicationContext(), 1, intentAlarma, PendingIntent.FLAG_UPDATE_CURRENT);
-            AlarmManager am =(AlarmManager) context.getApplicationContext().getSystemService(ALARM_SERVICE);
-            am.cancel(piAlarma);
-            piAlarma.cancel();
-
             Usuario usuario = (Usuario) intent.getSerializableExtra("usuario");
             Reserva reserva = (Reserva) intent.getSerializableExtra("reserva");
             reserva.setConfirmada(true);
+            Log.d(TAG, "reserva: " + reserva.getId());
+
+            Intent intentAlarma = new Intent(context.getApplicationContext(), AlarmReceiver.class);
+            PendingIntent piAlarma = PendingIntent.getBroadcast(context.getApplicationContext(), reserva.getId(), intentAlarma, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager am =(AlarmManager) context.getApplicationContext().getSystemService(ALARM_SERVICE);
+            am.cancel(piAlarma);
+            piAlarma.cancel();
 
             String nombreIntent = "dam.isi.frsf.utn.edu.ar.laboratorio04.notificacion";
             Intent broadcastIntent = new Intent(nombreIntent);
