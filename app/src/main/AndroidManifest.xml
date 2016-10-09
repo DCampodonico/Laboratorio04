@@ -14,7 +14,7 @@
   ~
   ~ You should have received a copy of the GNU General Public License
   ~ along with Laboratorio04.  If not, see <http://www.gnu.org/licenses/>.
--->
+  -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dam.isi.frsf.utn.edu.ar.laboratorio04">
 
