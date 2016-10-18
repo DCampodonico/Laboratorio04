@@ -42,7 +42,7 @@ public class Preferencias extends PreferenceActivity implements SharedPreference
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferencias);
 
-
+        PreferenceManager.setDefaultValues(this, R.xml.preferencias, false);
         preferencias = PreferenceManager.getDefaultSharedPreferences(this);
         opcionUsuario = (EditTextPreference) findPreference("opcionUsuario");
         opcionCorreo = (EditTextPreference) findPreference("opcionCorreo");
