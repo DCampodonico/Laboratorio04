@@ -42,6 +42,7 @@ public class Preferencias extends PreferenceActivity implements SharedPreference
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferencias);
 
+
         preferencias = PreferenceManager.getDefaultSharedPreferences(this);
         opcionUsuario = (EditTextPreference) findPreference("opcionUsuario");
         opcionCorreo = (EditTextPreference) findPreference("opcionCorreo");
@@ -70,7 +71,7 @@ public class Preferencias extends PreferenceActivity implements SharedPreference
         opcionUsuario.setSummary(preferencias.getString("opcionUsuario", getResources().getString(R.string.opcionUsuario_summary)));
         opcionCorreo.setSummary(preferencias.getString("opcionCorreo", getResources().getString(R.string.opcionCorreo_summary)));
 
-        String strRingtonePreference = preferencias.getString("opcionRingtone", "DEFAULT_SOUND");
+        String strRingtonePreference = preferencias.getString("opcionRingtone", getResources().getString(R.string.opcionRingtone_default));
         Uri ringtoneUri = Uri.parse(strRingtonePreference);
         Ringtone ringtone = RingtoneManager.getRingtone(this, ringtoneUri);
         opcionRingtone.setSummary(ringtone.getTitle(this));

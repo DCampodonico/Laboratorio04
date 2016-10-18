@@ -23,7 +23,8 @@
         android:title="@string/opcionUsuario_title"
         android:summary="@string/opcionUsuario_summary"
         android:capitalize="words"
-        android:dialogTitle="@string/opcionUsuario_title">
+        android:dialogTitle="@string/opcionUsuario_title"
+        android:defaultValue="@string/opcionUsuario_default">
 
     </EditTextPreference>
 
@@ -31,7 +32,8 @@
         android:key="opcionCorreo"
         android:title="@string/opcionCorreo_title"
         android:summary="@string/opcionCorreo_summary"
-        android:dialogTitle="@string/opcionCorreo_title">
+        android:dialogTitle="@string/opcionCorreo_title"
+        android:defaultValue="@string/opcionCorreo_default">
 
     </EditTextPreference>
 
@@ -40,7 +42,9 @@
         android:title="@string/opcionRingtone_title"
         android:showSilent="true"
         android:ringtoneType="notification"
-        android:summary="@string/opcionRingtone_summary">
+        android:summary="@string/opcionRingtone_summary"
+        android:defaultValue="@string/opcionRingtone_default">
+
 
     </RingtonePreference>
 </PreferenceScreen>

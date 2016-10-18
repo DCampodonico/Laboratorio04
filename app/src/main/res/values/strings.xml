@@ -33,9 +33,12 @@
     <string name="titulo_reserva_aceptada">Reserva aceptada!</string>
     <string name="opcionUsuario_title">Nombre de usuario</string>
     <string name="opcionUsuario_summary">Android Studio</string>
+    <string name="opcionUsuario_default">Android Studio</string>
     <string name="opcionCorreo_title">Correo electrónico</string>
+    <string name="opcionCorreo_default">android.studio@android.com</string>
     <string name="opcionCorreo_summary">android.studio@android.com</string>
     <string name="opcionCorreo_error">El correo ingresado es inválido!</string>
     <string name="opcionRingtone_title">Ringtone</string>
     <string name="opcionRingtone_summary">Ringtone</string>
+    <string name="opcionRingtone_default">content://settings/system/notification_sound</string>
 </resources>

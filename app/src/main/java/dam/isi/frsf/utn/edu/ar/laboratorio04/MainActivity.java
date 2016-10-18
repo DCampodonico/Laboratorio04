@@ -89,14 +89,15 @@ public class MainActivity extends AppCompatActivity
             usuario = new Usuario(1);
         }
 
+        PreferenceManager.setDefaultValues(this, R.xml.preferencias, false);
         preferencias = PreferenceManager.getDefaultSharedPreferences(this);
 
         tvUsuario = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvUsuario);
-        String opcionUsuario = preferencias.getString("opcionUsuario", getResources().getString(R.string.opcionUsuario_summary));
+        String opcionUsuario = preferencias.getString("opcionUsuario", getResources().getString(R.string.opcionUsuario_default));
         tvUsuario.setText(opcionUsuario);
 
         tvCorreo = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvCorreo);
-        String opcionCorreo = preferencias.getString("opcionCorreo", getResources().getString(R.string.opcionCorreo_summary));
+        String opcionCorreo = preferencias.getString("opcionCorreo", getResources().getString(R.string.opcionCorreo_default));
         tvCorreo.setText(opcionCorreo);
 
         preferencias.registerOnSharedPreferenceChangeListener(this);
