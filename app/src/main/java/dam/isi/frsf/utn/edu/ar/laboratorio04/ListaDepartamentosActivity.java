@@ -33,8 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Departamento;
-import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Reserva;
-import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Usuario;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.BuscarDepartamentosTask;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.BusquedaFinalizadaListener;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.FormBusqueda;
@@ -60,12 +58,12 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
         super.onStart();
         Intent intent = getIntent();
         Boolean esBusqueda = intent.getExtras().getBoolean("esBusqueda");
-        if (esBusqueda) {
+        if (esBusqueda && lista.isEmpty()) {
             FormBusqueda fb = (FormBusqueda) intent.getSerializableExtra("frmBusqueda");
             new BuscarDepartamentosTask(ListaDepartamentosActivity.this).execute(fb);
             tvEstadoBusqueda.setText("Buscando....");
             tvEstadoBusqueda.setVisibility(View.VISIBLE);
-        } else {
+        } else if(lista.isEmpty()){
             tvEstadoBusqueda.setVisibility(View.GONE);
             lista = Departamento.getAlojamientosDisponibles();
         }
