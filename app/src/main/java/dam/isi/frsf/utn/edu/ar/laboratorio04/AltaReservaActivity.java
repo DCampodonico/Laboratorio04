@@ -27,6 +27,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -60,6 +61,7 @@ public class AltaReservaActivity extends AppCompatActivity implements View.OnCli
         Intent intent = getIntent();
         departamento = (Departamento) intent.getSerializableExtra("departamento");
 
+        DecimalFormat df = new DecimalFormat("#.##");
         tvDescripcion = (TextView) findViewById(R.id.tvDescripcion);
         tvDescripcion.setText(departamento.getDescripcion());
         tvFechaInicio = (TextView) findViewById(R.id.tvFechaInicio);
@@ -69,7 +71,7 @@ public class AltaReservaActivity extends AppCompatActivity implements View.OnCli
         tvFechaFin.setText(R.string.tv_fecha_fin);
         dpFechaFin = (DatePicker) findViewById(R.id.dpFechaFin);
         tvPrecio = (TextView) findViewById(R.id.tvPrecio);
-        tvPrecio.setText("$ "+departamento.getPrecio());
+        tvPrecio.setText("$ "+(df.format(departamento.getPrecio())));
         fabtnConfirmar = (FloatingActionButton) findViewById(R.id.fabtnConfirmar);
     }
 
