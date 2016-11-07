@@ -56,7 +56,7 @@ public class Departamento implements Serializable {
         this.cantidadCamas =this.cantidadHabitaciones+r.nextInt(2);
         this.telefonoPropietario= "+54"+(111111+r.nextInt());
         this.ciudad = Ciudad.CIUDADES[r.nextInt(5)];
-        this.reservas=new ArrayList<Reserva>();
+        this.reservas=new ArrayList<>();
     }
 
 
@@ -160,7 +160,7 @@ public class Departamento implements Serializable {
                 '}';
     }
 
-    private static final List<Departamento> _ALOJAMIENTOS_DISPONIBLES= new ArrayList<Departamento>();
+    private static final List<Departamento> _ALOJAMIENTOS_DISPONIBLES= new ArrayList<>();
     private static Boolean _FLAG_INICIALIZADO = false;
 
     public static List<Departamento> getAlojamientosDisponibles(){

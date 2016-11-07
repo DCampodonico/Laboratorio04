@@ -18,15 +18,9 @@
 
 package dam.isi.frsf.utn.edu.ar.laboratorio04.modelo;
 
-import android.support.annotation.NonNull;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.StringTokenizer;
 
 /**
  * Created by mdominguez on 22/09/16.

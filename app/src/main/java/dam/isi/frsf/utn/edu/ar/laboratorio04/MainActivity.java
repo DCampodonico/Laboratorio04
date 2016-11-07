@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         tvUsuario.setText(opcionUsuario);
 
         tvCorreo = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvCorreo);
-        String opcionCorreo = preferencias.getString("opcionCorreo", getResources().getString(R.string.opcionCorreo_default));
+        String opcionCorreo = preferencias.getString("opcionCorreo", getResources().getString(R.string.opcionUsuario_default));
         tvCorreo.setText(opcionCorreo);
 
         preferencias.registerOnSharedPreferenceChangeListener(this);
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity
         frmBusq.setPrecioMaximo(0.0);
 
         swFumadores = (Switch) findViewById(R.id.aptoFumadores);
-        adapterCiudad = new ArrayAdapter<Ciudad>(MainActivity.this,android.R.layout.simple_spinner_item, Arrays.asList(Ciudad.CIUDADES));
+        adapterCiudad = new ArrayAdapter<>(MainActivity.this,android.R.layout.simple_spinner_item, Arrays.asList(Ciudad.CIUDADES));
 
         cmbCiudad = (Spinner) findViewById(R.id.comboCiudad);
         cmbCiudad.setAdapter(adapterCiudad);

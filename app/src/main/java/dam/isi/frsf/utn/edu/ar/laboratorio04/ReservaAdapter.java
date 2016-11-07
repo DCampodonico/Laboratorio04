@@ -26,12 +26,10 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-import java.text.StringCharacterIterator;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Departamento;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Reserva;
 
 public class ReservaAdapter extends ArrayAdapter<Reserva> {
