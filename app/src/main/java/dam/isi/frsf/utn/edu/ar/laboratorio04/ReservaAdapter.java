@@ -19,30 +19,33 @@
 package dam.isi.frsf.utn.edu.ar.laboratorio04;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Reserva;
 
-public class ReservaAdapter extends ArrayAdapter<Reserva> {
+class ReservaAdapter extends ArrayAdapter<Reserva> {
     private LayoutInflater inflater;
     private Context contexto;
 
-    public ReservaAdapter(Context contexto, List<Reserva> items) {
+    ReservaAdapter(Context contexto, List<Reserva> items) {
         super(contexto, R.layout.fila_reserva, items);
         inflater = LayoutInflater.from(contexto);
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         DecimalFormat df = new DecimalFormat("#.##");
         View row = convertView;
         if (row == null) row = inflater.inflate(R.layout.fila_reserva, parent, false);
@@ -59,10 +62,8 @@ public class ReservaAdapter extends ArrayAdapter<Reserva> {
         return row;
     }
 
-    //TODO ver
     private String formatFecha(Date fecha){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(fecha);
-        return calendar.get(Calendar.DAY_OF_MONTH)+"/"+(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.YEAR);
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(fecha);
     }
 }

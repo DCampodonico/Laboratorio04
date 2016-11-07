@@ -23,17 +23,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
-import java.util.List;
-
-import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Reserva;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Usuario;
 
 public class ReservasActivity extends AppCompatActivity {
 
 
     private ListView lvReservas;
-    private List<Reserva> listaReservas;
-    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +41,8 @@ public class ReservasActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Intent intent = getIntent();
-        usuario = (Usuario) intent.getSerializableExtra("usuario");
-        listaReservas = usuario.getReservas();
-        ReservaAdapter  reservaAdapter= new ReservaAdapter(ReservasActivity.this, listaReservas);
+        Usuario usuario = (Usuario) intent.getSerializableExtra("usuario");
+        ReservaAdapter  reservaAdapter= new ReservaAdapter(ReservasActivity.this, usuario.getReservas());
         lvReservas.setAdapter(reservaAdapter);
     }
 }

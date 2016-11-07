@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if((resultCode==0)&&(requestCode==1)) { //TODO: Está bien esto?
+        if((resultCode==0)&&(requestCode==1)) {
             if(data!=null){
                 Reserva reserva = (Reserva) data.getSerializableExtra("reserva");
                 usuario.getReservas().add(reserva);
@@ -235,7 +235,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.

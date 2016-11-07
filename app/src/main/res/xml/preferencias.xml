@@ -18,6 +18,9 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/preferencias">
+
+    </PreferenceCategory>
     <EditTextPreference
         android:key="opcionUsuario"
         android:title="@string/opcionUsuario_title"

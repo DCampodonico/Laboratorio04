@@ -27,7 +27,9 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -141,11 +143,9 @@ public class AltaReservaActivity extends AppCompatActivity implements View.OnCli
         return calendar.getTime();
     }
 
-    //TODO ver
     private String formatFecha(Date fecha){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(fecha);
-        return calendar.get(Calendar.DAY_OF_MONTH)+"/"+(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.YEAR);
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(fecha);
     }
 
 }
